@@ -142,34 +142,28 @@ def register(event):
     password_cf.bind("<FocusOut>",pass_cf_on_leave)
     buttom_signup(24,710)
 
-def registration_data() :
+def registration_data(event) :
     if name.get() == '':
-        messagebox.showwarning('Admin:','Please enter firstname')
+        messagebox.showwarning('Admin:','Please enter Name')
         name.focus_force()
     elif gmail.get() == '' :
-        messagebox.showwarning('Admin:','Please enter lastname')
+        messagebox.showwarning('Admin:','Please enter Gmail')
         gmail.focus_force()
     elif password.get() == '':
-        messagebox.showwarning('Admin:','Please select year')
+        messagebox.showwarning('Admin:','Please select Password')
         password.focus_force()
     elif password_cf.get() == '':
-        messagebox.showwarning('Admin:','Please select year')
+        messagebox.showwarning('Admin:','Please select Confirm Password')
         password_cf.focus_force()
     elif len(password.get()) == 10 and password.get().isdigit() :
         if password.get() == password_cf.get():
-            ins_sql = "INSERT INTO students VALUES(?,?,?,?,?,?,?)"
-            param = [name.get(),gmail.get(),password.get()]
+            ins_sql = "INSERT INTO login VALUES(?,?,?)"
+            param = [gmail.get(),password.get(),name.get()]
             cursor.execute(ins_sql,param)
             conn.commit()
             retrivedata()
             messagebox.showinfo("Admin","Registration Successfully")
 
-
-        
-
-    
-
-    
 
 def pag_login():
     Label(splash_page,relief=FLAT,image=login_pag).place(x=-1,y=-1)
