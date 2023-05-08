@@ -252,6 +252,8 @@ def retrivedata() :
     for i,data in enumerate(result) :
         print("Row#",i+1,data)
 
+print('ok')
+
 
 creatconnection()
 root = mainwindow()
