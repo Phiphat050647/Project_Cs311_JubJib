@@ -255,7 +255,7 @@ def retrivedata() :
 print('ok')
 print('5555')
 
-
+print('5555')
 creatconnection()
 root = mainwindow()
 
