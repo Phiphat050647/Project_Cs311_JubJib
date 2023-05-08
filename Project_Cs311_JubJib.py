@@ -142,28 +142,49 @@ def register(event):
     password_cf.bind("<FocusOut>",pass_cf_on_leave)
     buttom_signup(24,710)
 
-def registration_data(event) :
-    if name.get() == '':
-        messagebox.showwarning('Admin:','Please enter Name')
-        name.focus_force()
-    elif gmail.get() == '' :
-        messagebox.showwarning('Admin:','Please enter Gmail')
-        gmail.focus_force()
-    elif password.get() == '':
-        messagebox.showwarning('Admin:','Please select Password')
-        password.focus_force()
-    elif password_cf.get() == '':
-        messagebox.showwarning('Admin:','Please select Confirm Password')
-        password_cf.focus_force()
-    elif len(password.get()) == 10 and password.get().isdigit() :
-        if password.get() == password_cf.get():
-            ins_sql = "INSERT INTO login VALUES(?,?,?)"
-            param = [gmail.get(),password.get(),name.get()]
-            cursor.execute(ins_sql,param)
-            conn.commit()
-            retrivedata()
-            messagebox.showinfo("Admin","Registration Successfully")
+    Label_buttom = Label(splash_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#181c2e',border=0)
+    Label_buttom.place(x=20,y=16)
 
+    def goto_loin(event):
+        pag_login()
+    def on_enter(e):
+        Label_buttom.config(cursor='hand2')
+    Label_buttom.bind("<Enter>",on_enter)
+    Label_buttom.bind("<Button-1>", goto_loin)
+
+def registration_data(event) :
+    sql = "select * from login where name=?"
+    cursor.execute(sql,[name.get()])
+    result = cursor.fetchone()
+    print(result)
+    if result:
+        if name.get() == '':
+            messagebox.showwarning('Admin:','Please enter Name')
+            name.focus_force()
+        elif result[2] == name.get() :
+            messagebox.showwarning('Admin:','Duplicate username, please change the name.')
+            name.focus_force()
+        elif gmail.get() == result[0] :
+            messagebox.showwarning('Admin:','Duplicate Gmail, please change the gmail.')
+            gmail.focus_force()
+        elif gmail.get() == '' :
+            messagebox.showwarning('Admin:','Please enter Gmail')
+            gmail.focus_force()
+        elif password.get() == '':
+            messagebox.showwarning('Admin:','Please select Password')
+            password.focus_force()
+        elif password_cf.get() == '':
+            messagebox.showwarning('Admin:','Please select Confirm Password')
+            password_cf.focus_force()
+        elif len(password.get()) == 10 and password.get().isdigit() :
+            if password.get() == password_cf.get():
+                ins_sql = "INSERT INTO login VALUES(?,?,?)"
+                param = [gmail.get(),password.get(),name.get()]
+                cursor.execute(ins_sql,param)
+                conn.commit()
+                retrivedata()
+                messagebox.showinfo("Admin","Registration Successfully")
+                pag_login()
 
 def pag_login():
     Label(splash_page,relief=FLAT,image=login_pag).place(x=-1,y=-1)
@@ -203,7 +224,7 @@ def loginclick(event) :
         messagebox.showwarning("Admin:","Please enter Username")
         gmail.focus_force()
     else :
-        sql = "select * from login where user_gmail=?"
+        sql = "select * from login where name=?"
         cursor.execute(sql,[gmail.get()])
         result = cursor.fetchall()
         if result :
@@ -211,7 +232,7 @@ def loginclick(event) :
                 messagebox.showwarning("Admin:","Please enter password")
                 password.focus_force()
             else :
-                sql = "select * from login where user_gmail=? and password=? "
+                sql = "select * from login where name=? and password=? "
                 cursor.execute(sql,[gmail.get(),password.get()])   #case1
                 user_result = cursor.fetchone()
                 if user_result :
@@ -233,23 +254,33 @@ def page_2():
     Label(splash_page,relief=FLAT,image=page2).grid(row=0,column=0,sticky=NSEW)
     buttom_click_pag2(24,675)
 
+
+def home1(event):
+    print('ok')
+
 def pag3(event):
         Label(splash_page,relief=FLAT,image=page3).grid(row=0,column=0,sticky=NSEW)
+        Label_buttom = Label(splash_page,relief=FLAT,image=buttom_image,width=327,height=62,bg='#ffffff',border=0)
+        Label_buttom.place(x=24,y=675)
+        def on_enter(e):
+            Label_buttom.config(cursor='hand2')
+            buttom_register.configure(file='image_2\\buttom_act.png')
+        def on_leave(e):
+            buttom_register.configure(file='image_2\\buttom.png')
+        Label_buttom.bind("<Enter>",on_enter)
+        Label_buttom.bind("<Leave>",on_leave)
+        Label_buttom.bind("<Button-1>", home1)
         
-
-
 def retrivedata() :
-    sql = "select * from students"
+    sql = "select * from login"
     cursor.execute(sql)
     result = cursor.fetchall()
     print("Total row = ",len(result))
     for i,data in enumerate(result) :
         print("Row#",i+1,data)
 
-print('ok')
-print('5555')
 
-print('5555')
+
 creatconnection()
 root = mainwindow()
 
@@ -261,6 +292,7 @@ page3 = PhotoImage(file='image_2\page_3.png').subsample(1,1)
 buttom_image = PhotoImage(file='image_2\\buttom.png')
 buttom_login = PhotoImage(file='image_2\\buttom_login.png')
 buttom_register = PhotoImage(file='image_2\\register_buttom.png')
+buttom_back = PhotoImage(file='image_2\\buttom_back.png')
 login_pag = PhotoImage(file='image_2\loing.png')
 
 firt_pace()
