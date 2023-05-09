@@ -24,16 +24,33 @@ def mainwindow():
 
 
 def home1():
-    splash_page = Frame(root,bg='#ffffff')
-    splash_page.grid(row=0,column=0,sticky=NSEW)
-    Label(splash_page,relief=FLAT,image=home_v1,width=375,height=812).grid(row=0,column=0,sticky=NSEW)
-    scoll = Scrollbar(splash_page, orient= 'vertical')
+    canvas = Canvas(root, bg='yellow',width=375, height=2000, scrollregion=(0,0,375,2000))
+    canvas.pack()
+    splash_page = Frame(canvas,bg='#ffffff')
+    canvas.create_window((0,0), window=splash_page, anchor=NW)
+    home_1 = Label(splash_page,relief=FLAT,image=home_v1,width=375,height=2000)
+    home_1.pack()
+
+
+    Label_buttom = Label(splash_page,relief=FLAT,image=shop_1,width=327,height=137,bg='#ffffff',border=0)
+    Label_buttom.place(x=27,y=255)
+    def on_enter(e):
+        Label_buttom.config(cursor='hand2')
+    Label_buttom.bind("<Enter>",on_enter)
+    
+
+
+    scoll = Scrollbar(canvas, orient= 'vertical' ,command=canvas.yview)
+    canvas.configure(yscrollcommand= scoll.set)
     scoll.place(relx= 1 , rely= 0,relheight=1,anchor=NE)
 
+    home_1.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
 
+    canvas.config(yscrollcommand=scoll.set)
+    splash_page.update_idletasks()
+    canvas.config(scrollregion=canvas.bbox('all'))
 
 root = mainwindow()
-home1()
 logo = PhotoImage(file='image_2\logo jukjik 02.png').subsample(3,3)
 bg_firt = PhotoImage(file='image_2\Bg_firt.png').subsample(1,1)
 bg_signup = PhotoImage(file='image_2\\bg_signup.png').subsample(1,1)
@@ -45,4 +62,6 @@ buttom_register = PhotoImage(file='image_2\\register_buttom.png')
 buttom_back = PhotoImage(file='image_2\\buttom_back.png')
 login_pag = PhotoImage(file='image_2\loing.png')
 home_v1 = PhotoImage(file='image_2\Home_1.png')
+shop_1 = PhotoImage(file='image_2\shop_1.png')
+home1()
 root.mainloop()
