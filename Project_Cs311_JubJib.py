@@ -256,7 +256,9 @@ def page_2():
 
 
 def home1(event):
-    print('ok')
+    Label(splash_page,relief=FLAT,image=home_v1,width=375,height=812).grid(row=0,column=0,sticky=NSEW)
+    scoll = Scrollbar(splash_page, orient= 'vertical')
+    scoll.place(relx= 1 , rely= 0,relheight=1,anchor=NE)
 
 def pag3(event):
         Label(splash_page,relief=FLAT,image=page3).grid(row=0,column=0,sticky=NSEW)
@@ -294,7 +296,7 @@ buttom_login = PhotoImage(file='image_2\\buttom_login.png')
 buttom_register = PhotoImage(file='image_2\\register_buttom.png')
 buttom_back = PhotoImage(file='image_2\\buttom_back.png')
 login_pag = PhotoImage(file='image_2\loing.png')
-
+home_v1 = PhotoImage(file='image_2\Home_1.png')
 firt_pace()
 buttom_all()
 root.mainloop()
