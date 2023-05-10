@@ -19,34 +19,115 @@ def mainwindow():
     
     return root
 
+def buttom_revese(event):
+    canvas_1.destroy()
+    in_shop_page.destroy()
+    in_shop.destroy()
+
+def in_shop_3(event):
+    global canvas_1,in_shop_page,in_shop
+
+    print('ok 2')
+    canvas.destroy()
+    Label_buttom.destroy()
+    home_1.destroy()
+
+    canvas_1 = Canvas(root, bg='yellow',width=375, height=1100, scrollregion=(0,0,375,1100))
+    canvas_1.pack()
+    in_shop_page = Frame(canvas_1,bg='#ffffff')
+
+    canvas_1.create_window((0,0), window=in_shop_page, anchor=NW)
+
+    in_shop = Label(in_shop_page,relief=FLAT,image=in_shop3,width=375,height=1100)
+    in_shop.pack()
+    
+    in_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
 
+    in_shop_page.update_idletasks()
+    canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
+def in_shop_2(event):
+    print('ok 2')
+    canvas.destroy()
+    Label_buttom.destroy()
+    home_1.destroy()
+    canvas_1 = Canvas(root, bg='yellow',width=375, height=1500, scrollregion=(0,0,375,1500))
+    canvas_1.pack()
+    in_shop_page = Frame(canvas_1,bg='#ffffff')
+
+    canvas_1.create_window((0,0), window=in_shop_page, anchor=NW)
+
+    in_shop = Label(in_shop_page,relief=FLAT,image=in_shop2,width=375,height=1500)
+    in_shop.pack()
+    
+    in_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+
+
+    in_shop_page.update_idletasks()
+    canvas_1.config(scrollregion=canvas_1.bbox('all'))
+
+def in_shop_1(event):
+
+    print('ok')
+    canvas.destroy()
+    Label_buttom.destroy()
+    home_1.destroy()
+
+    canvas_1 = Canvas(root, bg='yellow',width=375, height=1261, scrollregion=(0,0,375,1261))
+    canvas_1.pack()
+    in_shop_page = Frame(canvas_1,bg='#ffffff')
+
+    canvas_1.create_window((0,0), window=in_shop_page, anchor=NW)
+
+    in_shop = Label(in_shop_page,relief=FLAT,image=in_shop1,width=375,height=1261)
+    in_shop.pack()
+    
+    in_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+
+
+    in_shop_page.update_idletasks()
+    canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def home1():
-    canvas = Canvas(root, bg='yellow',width=375, height=2000, scrollregion=(0,0,375,2000))
+    global splash_page,canvas,home_1,Label_buttom
+    canvas = Canvas(root, bg='yellow',width=375, height=853 ,scrollregion=(0,0,375,853))
     canvas.pack()
     splash_page = Frame(canvas,bg='#ffffff')
     canvas.create_window((0,0), window=splash_page, anchor=NW)
-    home_1 = Label(splash_page,relief=FLAT,image=home_v1,width=375,height=2000)
+
+    home_1 = Label(splash_page,relief=FLAT,image=home_v1,width=375,height=853)
     home_1.pack()
 
 
-    Label_buttom = Label(splash_page,relief=FLAT,image=shop_1,width=327,height=137,bg='#ffffff',border=0)
-    Label_buttom.place(x=27,y=255)
+    Label_buttom = Label(splash_page,relief=FLAT,image=shop_1,width=328,height=225,bg='#ffffff',border=0)
+    Label_buttom.place(x=29,y=109)
     def on_enter(e):
         Label_buttom.config(cursor='hand2')
     Label_buttom.bind("<Enter>",on_enter)
-    
+    Label_buttom.bind("<Button-1>", in_shop_1)
 
 
-    scoll = Scrollbar(canvas, orient= 'vertical' ,command=canvas.yview)
-    canvas.configure(yscrollcommand= scoll.set)
-    scoll.place(relx= 1 , rely= 0,relheight=1,anchor=NE)
+    Label_buttom_2 = Label(splash_page,relief=FLAT,image=shop_2,width=328,height=225,bg='#ffffff',border=0)
+    Label_buttom_2.place(x=29,y=361)
+    def on_enter(e):
+        Label_buttom_2.config(cursor='hand2')
+    Label_buttom_2.bind("<Enter>",on_enter)
+    Label_buttom_2.bind("<Button-1>", in_shop_2)
+
+
+    Label_buttom_3 = Label(splash_page,relief=FLAT,image=shop_3,width=328,height=225,bg='#ffffff',border=0)
+    Label_buttom_3.place(x=29,y=593)
+    def on_enter(e):
+        Label_buttom_3.config(cursor='hand2')
+    Label_buttom_3.bind("<Enter>",on_enter)
+    Label_buttom_3.bind("<Button-1>", in_shop_3)
+
 
     home_1.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
-
-    canvas.config(yscrollcommand=scoll.set)
+    Label_buttom.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
+    Label_buttom_2.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
+    Label_buttom_3.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
     splash_page.update_idletasks()
     canvas.config(scrollregion=canvas.bbox('all'))
 
@@ -61,7 +142,12 @@ buttom_login = PhotoImage(file='image_2\\buttom_login.png')
 buttom_register = PhotoImage(file='image_2\\register_buttom.png')
 buttom_back = PhotoImage(file='image_2\\buttom_back.png')
 login_pag = PhotoImage(file='image_2\loing.png')
-home_v1 = PhotoImage(file='image_2\Home_1.png')
+home_v1 = PhotoImage(file='image_2\Home V_1.png')
 shop_1 = PhotoImage(file='image_2\shop_1.png')
+shop_2 = PhotoImage(file='image_2\Resturant 2.png')
+shop_3 = PhotoImage(file='image_2\Resturant 3.png')
+in_shop1 = PhotoImage(file='image_2\in_shop_1.png')
+in_shop2 = PhotoImage(file='image_2\in_shop_2.png')
+in_shop3 = PhotoImage(file='image_2\in_shop_3.png')
 home1()
 root.mainloop()
