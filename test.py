@@ -23,6 +23,7 @@ def buttom_revese(event):
     canvas_1.destroy()
     in_shop_page.destroy()
     in_shop.destroy()
+    home1()
 
 def in_shop_3(event):
     global canvas_1,in_shop_page,in_shop
@@ -42,12 +43,21 @@ def in_shop_3(event):
     in_shop.pack()
     
     in_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    
+    revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
+    revese.place(x=29,y=17)
+       
+    def on_enter(e):
+        revese.config(cursor='hand2')
+    revese.bind("<Enter>",on_enter)
+    revese.bind("<Button-1>", buttom_revese)
 
 
     in_shop_page.update_idletasks()
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def in_shop_2(event):
+    global canvas_1,in_shop_page,in_shop
     print('ok 2')
     canvas.destroy()
     Label_buttom.destroy()
@@ -63,11 +73,19 @@ def in_shop_2(event):
     
     in_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
+    revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
+    revese.place(x=29,y=17)
+       
+    def on_enter(e):
+        revese.config(cursor='hand2')
+    revese.bind("<Enter>",on_enter)
+    revese.bind("<Button-1>", buttom_revese)
 
     in_shop_page.update_idletasks()
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def in_shop_1(event):
+    global canvas_1,in_shop_page,in_shop
 
     print('ok')
     canvas.destroy()
@@ -85,6 +103,13 @@ def in_shop_1(event):
     
     in_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
+    revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
+    revese.place(x=29,y=17)
+    def on_enter(e):
+        revese.config(cursor='hand2')
+    revese.bind("<Enter>",on_enter)
+
+    revese.bind("<Button-1>", buttom_revese)
 
     in_shop_page.update_idletasks()
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
