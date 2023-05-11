@@ -838,6 +838,18 @@ def pag_edit(event):
 
     editpag = Label(in_shop_page,relief=FLAT,image=edite,width=375,height=812)
     editpag.pack()
+
+
+    fullname = Entry(in_shop_page,width=20,fg='#646464',border=0,bg='#f0f5fa')
+    fullname.place(x=44,y=300)
+    fullname.insert(0, '')
+
+    revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
+    revese.place(x=27,y=35)
+    def on_enter(e):
+        revese.config(cursor='hand2')
+    revese.bind("<Enter>",on_enter)
+    revese.bind("<Button-1>", buttom_revese)
     
 def proflie_pag(event):
     global canvas_1,in_shop_page,in_shop,cart_shop

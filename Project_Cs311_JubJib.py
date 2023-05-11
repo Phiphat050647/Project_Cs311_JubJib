@@ -93,52 +93,41 @@ def buttom_all():
 def register(event):
     Label(splash_page,relief=FLAT,image=bg_signup).place(x=-1,y=-1)
     global name,gmail,password,password_cf
-    def name_on_enter(e):
-        name.delete(0,'end')
     def name_on_leave(e):
         if name.get()=="":
-            name.insert(0,'john wick')
+            name.insert(0,'')
     
-    def gmail_on_enter(e):
-        gmail.delete(0,'end')
     def gmail_on_leave(e):
         if gmail.get()=="":
-            gmail.insert(0,'example@gmail.com')
+            gmail.insert(0,'')
 
-    def pass_on_enter(e):
-        password.delete(0,'end')
     def pass_on_leave(e):
         if password.get()=="":
-            password.insert(0,' **********')
+            password.insert(0,'')
     
-    def pass_cf_on_enter(e):
-        password_cf.delete(0,'end')
     def pass_cf_on_leave(e):
         if password_cf.get()=="":
-            password_cf.insert(0,' **********')
+            password_cf.insert(0,'')
 
     name = Entry(splash_page,width=23,fg='#646464',border=0,bg='#f0f5fa')
     name.place(x=32,y=279)
-    name.insert(0, 'john wick')
-    name.bind("<FocusIn>",name_on_enter)
+    name.insert(0, '')
+
     name.bind("<FocusOut>",name_on_leave)
     
     gmail = Entry(splash_page,width=23,fg='#646464',border=0,bg='#f0f5fa')
     gmail.place(x=32,y=390)
-    gmail.insert(0, 'example@gmail.com')
-    gmail.bind("<FocusIn>",gmail_on_enter)
+    gmail.insert(0, '')
     gmail.bind("<FocusOut>",gmail_on_leave)
 
     password = Entry(splash_page,width=23,fg='#646464',border=0,bg='#f0f5fa')
     password.place(x=32,y=500)
-    password.insert(0, ' **********')
-    password.bind("<FocusIn>",pass_on_enter)
+    password.insert(0, '')
     password.bind("<FocusOut>",pass_on_leave)
 
     password_cf = Entry(splash_page,width=23,fg='#646464',border=0,bg='#f0f5fa')
     password_cf.place(x=32,y=610)
-    password_cf.insert(0, ' **********')
-    password_cf.bind("<FocusIn>",pass_cf_on_enter)
+    password_cf.insert(0, '')
     password_cf.bind("<FocusOut>",pass_cf_on_leave)
     buttom_signup(24,710)
 
@@ -153,21 +142,27 @@ def register(event):
     Label_buttom.bind("<Button-1>", goto_loin)
 
 def registration_data(event) :
-    sql = "select * from login where name=?"
+    sql = "select * from login where name = ?"
     cursor.execute(sql,[name.get()])
-    result = cursor.fetchone()
+    result = cursor.fetchall()
+
+    sql_gmail = "select * from login where user_gmail = ?"
+    cursor.execute(sql_gmail,[gmail.get()])
+    result = cursor.fetchall()
+
     print(result)
     if result:
-        if name.get() == '':
-            messagebox.showwarning('Admin:','Please enter Name')
-            name.focus_force()
-        elif result[2] == name.get() :
+        if result[0][2] == name.get() :
             messagebox.showwarning('Admin:','Duplicate username, please change the name.')
             name.focus_force()
-        elif gmail.get() == result[0] :
+        elif gmail.get() == result[0][0] :
             messagebox.showwarning('Admin:','Duplicate Gmail, please change the gmail.')
             gmail.focus_force()
-        elif gmail.get() == '' :
+    elif name.get() == '':
+            messagebox.showwarning('Admin:','Please enter Name')
+            name.focus_force()
+    else :
+        if gmail.get() == '' :
             messagebox.showwarning('Admin:','Please enter Gmail')
             gmail.focus_force()
         elif password.get() == '':
@@ -176,41 +171,34 @@ def registration_data(event) :
         elif password_cf.get() == '':
             messagebox.showwarning('Admin:','Please select Confirm Password')
             password_cf.focus_force()
-        elif len(password.get()) == 10 and password.get().isdigit() :
-            if password.get() == password_cf.get():
-                ins_sql = "INSERT INTO login VALUES(?,?,?)"
-                param = [gmail.get(),password.get(),name.get()]
-                cursor.execute(ins_sql,param)
-                conn.commit()
-                retrivedata()
-                messagebox.showinfo("Admin","Registration Successfully")
-                pag_login()
+        elif password.get() == password_cf.get():
+            ins_sql = "INSERT INTO login VALUES(?,?,?)"
+            param = [gmail.get(),password.get(),name.get()]
+            cursor.execute(ins_sql,param)
+            conn.commit()
+            retrivedata()
+            messagebox.showinfo("Admin","Registration Successfully")
+            pag_login()
 
 def pag_login():
     Label(splash_page,relief=FLAT,image=login_pag).place(x=-1,y=-1)
     global gmail,password
-    def gmail_on_enter(e):
-        gmail.delete(0,'end')
     def gmail_on_leave(e):
         if gmail.get()=="":
-            gmail.insert(0,'example@gmail.com')
+            gmail.insert(0,'')
     
-    def password_on_enter(e):
-        password.delete(0,'end')
     def password_on_leave(e):
         if password.get()=="":
-            password.insert(0,'*******')
+            password.insert(0,'')
 
     gmail = Entry(splash_page,width=25,fg='#646464',border=0,bg='#f0f5fa')
     gmail.place(x=30,y=287)
-    gmail.insert(0, 'example@gmail.com')
-    gmail.bind("<FocusIn>",gmail_on_enter)
+    gmail.insert(0, '')
     gmail.bind("<FocusOut>",gmail_on_leave)
     
-    password = Entry(splash_page,width=25,fg='#646464',border=0,bg='#f0f5fa')
+    password = Entry(splash_page,width=25,fg='#646464',border=0,show='*',bg='#f0f5fa')
     password.place(x=30,y=400)
-    password.insert(0, '*************')
-    password.bind("<FocusIn>",password_on_enter)
+    password.insert(0, '')
     password.bind("<FocusOut>",password_on_leave)
     buttom_click_login(24,530)
     Label(splash_page,text='----------------- or -----------------',fg='#646464',bg='#ffffff').place(x=30,y=620)
@@ -221,10 +209,10 @@ def loginclick(event) :
     global user_result
 
     if gmail.get() == "" :
-        messagebox.showwarning("Admin:","Please enter Username")
+        messagebox.showwarning("Admin:","Please enter Gmail")
         gmail.focus_force()
     else :
-        sql = "select * from login where name=?"
+        sql = "select * from login where user_gmail= ?"
         cursor.execute(sql,[gmail.get()])
         result = cursor.fetchall()
         if result :
@@ -232,7 +220,7 @@ def loginclick(event) :
                 messagebox.showwarning("Admin:","Please enter password")
                 password.focus_force()
             else :
-                sql = "select * from login where name=? and password=? "
+                sql = "select * from login where user_gmail =? and password=? "
                 cursor.execute(sql,[gmail.get(),password.get()])   #case1
                 user_result = cursor.fetchone()
                 if user_result :
