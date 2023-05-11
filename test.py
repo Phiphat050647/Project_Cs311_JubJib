@@ -839,10 +839,29 @@ def pag_edit(event):
     editpag = Label(in_shop_page,relief=FLAT,image=edite,width=375,height=812)
     editpag.pack()
 
+    sql = "select * from login where user_gmail =?"
+    data = gmail.get()
+    cursor.execute(sql,data)
+    result = cursor.fetchall()
+
+
 
     fullname = Entry(in_shop_page,width=20,fg='#646464',border=0,bg='#f0f5fa')
     fullname.place(x=44,y=300)
-    fullname.insert(0, '')
+    fullname.insert(0, result[0][5])
+
+    email = Entry(in_shop_page,width=20,fg='#646464',border=0,bg='#f0f5fa')
+    email.place(x=44,y=405)
+    email.insert(0, result[0][0])
+
+    phone = Entry(in_shop_page,width=20,fg='#646464',border=0,bg='#f0f5fa')
+    phone.place(x=44,y=510)
+    phone.insert(0, result[0][3])
+
+    bio = Entry(in_shop_page,width=20,fg='#646464',border=0,bg='#f0f5fa')
+    bio.place(x=44,y=613)
+    bio.insert(0, result[0][4])
+
 
     revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
     revese.place(x=27,y=35)
@@ -864,8 +883,22 @@ def proflie_pag(event):
 
     canvas_1.create_window((0,0), window=in_shop_page, anchor=NW)
 
+    gmail = 0
+    sql = "select * from login where user_gmail=?"
+    cursor.execute(sql,[gmail])
+    result = cursor.fetchall()
+    print(result)
+    
+
+
     proflie_label = Label(in_shop_page,relief=FLAT,image=proflie,width=375,height=812)
     proflie_label.pack()
+
+    if result:
+         print('in')
+         print(result[0][2])
+         Label(in_shop_page,font='Helvetica 14 bold',text=result[0][5],fg='#000000',bg='#ffffff').place(x=156,y=141)
+         Label(in_shop_page,font='Helvetica 10 bold',text=result[0][4],fg='#929292',bg='#ffffff').place(x=156,y=169)
     
     cartgo = Label(in_shop_page,relief=FLAT,image=cart_warp,width=327,height=77,bg='#ffffff',border=0)
     cartgo.place(x=24,y=406)
@@ -898,6 +931,8 @@ def proflie_pag(event):
      
 def home1():
     global splash_page,canvas,home_1,Label_buttom
+
+
     canvas = Canvas(root, bg='yellow',width=375, height=853 ,scrollregion=(0,0,375,853))
     canvas.pack()
     splash_page = Frame(canvas,bg='#ffffff')
@@ -954,7 +989,7 @@ def home1():
     def on_enter(e):
         cart_shop.config(cursor='hand2')
     cart_shop.bind("<Enter>", on_enter)
-    cart_shop.bind("<Button-1>", buttom_revese)
+    cart_shop.bind("<Button-1>", confirm_order)
 
     check_cart()
     home_1.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
@@ -963,6 +998,243 @@ def home1():
     Label_buttom_3.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
     splash_page.update_idletasks()
     canvas.config(scrollregion=canvas.bbox('all'))
+
+def proflie_revese(event):
+    canvas_1.destroy()
+    in_shop_page.destroy()
+    proflie_pag(event)
+     
+def pag_edit(event):
+    global canvas_1,in_shop_page,in_shop,cart_shop
+    canvas_1.destroy()
+    in_shop_page.destroy()
+
+    canvas_1 = Canvas(root, bg='yellow',width=375, height=1087 ,scrollregion=(0,0,375,1087))
+    canvas_1.pack()
+    in_shop_page = Frame(canvas_1,bg='#ffffff')
+    canvas_1.create_window((0,0), window=in_shop_page, anchor=NW)
+    editpag = Label(in_shop_page,relief=FLAT,image=edite,width=375,height=1087)
+    editpag.pack()
+
+    save_but = Label(in_shop_page,relief=FLAT,image=save,width=327,height=62,bg='#ffffff',border=0)
+    save_but.place(x=27,y=975)
+    def on_enter(e):
+        save_but.config(cursor='hand2')
+    save_but.bind("<Enter>", on_enter)
+    save_but.bind("<Button-1>", buttom_revese)
+
+    gmail = 0
+    sql = "select * from login where user_gmail=?"
+    cursor.execute(sql,[gmail])
+    result = cursor.fetchall()
+    print(result)
+         
+    if result:
+        name_n = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
+        name_n.place(x=45,y=330)
+        name_n.insert(0, result[0][2])
+
+        full_name = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
+        full_name.place(x=45,y=430)
+        full_name.insert(0, result[0][5])
+
+        email_t = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
+        email_t.place(x=45,y=535)
+        email_t.insert(0, result[0][0])
+
+        phone_t = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
+        phone_t.place(x=45,y=638)
+        phone_t.insert(0, result[0][3])
+
+        bio_t = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
+        bio_t.place(x=45,y=849)
+        bio_t.insert(0, result[0][4])
+
+
+    pass_but = Label(in_shop_page,relief=FLAT,image=but_pass,width=327,height=62,bg='#ffffff',border=0)
+    pass_but.place(x=27,y=726)
+    def on_enter(e):
+        pass_but.config(cursor='hand2')
+    pass_but.bind("<Enter>", on_enter)
+    pass_but.bind("<Button-1>", changpass)
+
+    revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
+    revese.place(x=25,y=51)
+    def on_enter(e):
+        revese.config(cursor='hand2')
+    revese.bind("<Enter>",on_enter)
+    revese.bind("<Button-1>", proflie_revese)
+
+    
+
+    editpag.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    save_but.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    name_n.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    full_name.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    email_t.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    phone_t.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    pass_but.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    bio_t.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+
+def chang_pass_revese(event):
+    canvas_1.destroy()
+    in_shop_page.destroy()
+    pag_edit(event)
+
+def update_pass(event):
+    gmail = 0
+    sql = "select * from login where user_gmail=?"
+    cursor.execute(sql,[gmail])
+    result = cursor.fetchall()
+    print(result)
+
+    if n_pass.get() == "" :
+        messagebox.showwarning("Admin :","Please enter New Password")
+    elif cfn_pass.get() == "" :
+        messagebox.showwarning("Admin :","Please enter Confirm New Password")
+    elif n_pass.get() != cfn_pass.get() :
+        messagebox.showwarning("Admin :","Password did not match")
+        print(n_pass.get())
+        print(cfn_pass.get())
+    else :
+        sql = "UPDATE login SET password = ? WHERE user_gmail = ?"
+        cursor.execute(sql,[n_pass.get(),gmail])
+        conn.commit()
+        messagebox.showinfo("Admin :","Password Changed Successfully")
+
+def changpass(event):
+    global canvas_1, in_shop_page,n_pass,cfn_pass
+
+    print('ok')
+    canvas_1.destroy()
+    in_shop_page.destroy()
+
+    canvas_1 = Canvas(root, bg='yellow',width=375, height=812 ,scrollregion=(0,0,375,812))
+    canvas_1.pack()
+    in_shop_page = Frame(canvas_1,bg='#ffffff')
+    canvas_1.create_window((0,0), window=in_shop_page, anchor=NW)
+    changpass_bg = Label(in_shop_page,relief=FLAT,image=bg_pass,width=375,height=812)
+    changpass_bg.pack()
+
+    n_pass = Entry(in_shop_page,width=22,fg='#646464',show='*',border=0,bg='#f0f5fa')
+    n_pass.place(x=44,y=415)
+    n_pass.insert(0, '')
+
+    cfn_pass = Entry(in_shop_page,width=22,fg='#646464',show='*',border=0,bg='#f0f5fa')
+    cfn_pass.place(x=44,y=515)
+    cfn_pass.insert(0, '')
+
+    revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
+    revese.place(x=25,y=51)
+    def on_enter(e):
+        revese.config(cursor='hand2')
+    revese.bind("<Enter>",on_enter)
+    revese.bind("<Button-1>", chang_pass_revese)
+
+    save_b = Label(in_shop_page,relief=FLAT,image=save,width=327,height=62,bg='#ffffff',border=0)
+    save_b.place(x=25,y=710)
+    def on_enter(e):
+        save_b.config(cursor='hand2')
+    save_b.bind("<Enter>",on_enter)
+    save_b.bind("<Button-1>", update_pass)
+
+    #----------------------------------------------------------------------------------------------
+def button_all():
+    global button_back, button_confirm
+
+    def button_back():
+        global Label_buttom
+        Label_buttom = Label(in_shop_page, relief=FLAT, image=img_back, width=45, height=45, bg='#ffffff', border=0, cursor='hand2')
+        Label_buttom.place(x=24, y=50)
+
+        def on_enter(e):
+            img_back.configure(file="image_2\Back (1).png")
+
+        def on_leave(e):
+            img_back.configure(file="image_2\Back.png")
+
+        Label_buttom.bind("<Enter>", on_enter)
+        Label_buttom.bind("<Leave>", on_leave)
+        Label_buttom.bind("<Button-1>", chang_pass_revese)
+
+    def button_confirm():
+        global Label_buttom
+        Label_buttom = Label(relief=FLAT, image=img_confirm, width=327, height=62, bg='#ffffff', border=0, cursor='hand2')
+        Label_buttom.place(x=24, y=720)
+
+        def on_enter(e):
+            img_confirm.configure(file='image_2\Button confirm 2.png')
+
+        def on_leave(e):
+            img_confirm.configure(file='image_2\Button confirm 2.png')
+
+        Label_buttom.bind("<Enter>", on_enter)
+        Label_buttom.bind("<Leave>", on_leave)
+
+def delete_order_item(event):
+    print(index)
+    data.pop(index)
+    canvas_1.destroy()
+    in_shop_page.destroy()
+    print(data)
+    confirm_order(event)
+
+def confirm_order(event):
+    global canvas, in_shop_page,canvas,home_1
+    
+    canvas.destroy()
+    home_1.destroy()
+    in_shop_page.destroy()
+    
+    canvas_1 = Canvas(root, bg='#ffffff', width=375, height=812, scrollregion=(0, 0, 375,812))
+    canvas_1.pack()
+    in_shop_page = Frame(canvas_1, bg='#ffffff')
+    canvas_1.create_window((0, 0), window=in_shop_page, anchor=NW)
+    home_1 = Label(in_shop_page, relief=FLAT, bg='#ffffff', width=375, height=812)
+    home_1.pack()
+    Label(image=img_bigbg, border=0, bg='#ffffff').place(x=-21, y=512)
+    Label(image=img_BGbuttoncf, border=0, bg='#ffffff').place(x=22, y=512)
+    Label(text="ค่าจัดส่ง",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=44, y=558)
+    Label(text="10",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=280, y=558)
+    Label(text="฿",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=320, y=558)
+    Label(text="ค่าอาหาร",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=44, y=534)
+    allprice = sum(int(item[2]) * int(item[3]) for item in data) 
+    Label(text=str(allprice),font="Helvetica 10 bold", border=0, bg="#C8C8C8").place(x=280, y=534)
+    Label(text="฿",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=320, y=534)
+    Label(text="Total",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=44, y=582)
+    Label(text=(allprice+10),font="Helvetica 10 bold", border=0, bg="#C8C8C8").place(x=280, y=582)
+    Label(text="฿",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=320, y=582)
+
+
+    y_position = 126
+    canvas_height = y_position + len(data) * 135
+    canvas_1.config(height=812, scrollregion=(0, 0, 375, canvas_height))
+
+    for i, order_item in enumerate(data):
+        global index
+        index = i
+        order_shop = order_item[0]
+        order_text_menu = order_item[1]
+        order_text_menu_count = order_item[2]
+        order_text_menu_price = order_item[3]
+
+        Label(in_shop_page, image=img_myorder, border=0, bg='#ffffff').place(x=85, y=62)
+        Label(in_shop_page, image=img_BG_order, border=0, bg='#ffffff').place(x=22, y=y_position - 10)
+        Label(in_shop_page, text=order_shop, font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=41, y=y_position)
+        Label(in_shop_page, text=order_text_menu, font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=41, y=y_position + 23)
+        Label(in_shop_page, text=order_text_menu_price, font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=301, y=y_position + 23)
+        Label(in_shop_page, text=("x" + str(order_text_menu_count)), font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=41, y=y_position + 48)
+        delete_button = Button(in_shop_page,image=bunton_del,border=0,bg='#F0F5FA',command=lambda : delete_order_item(event),cursor='hand2')
+        delete_button.place(x=325, y=y_position + 23)
+        y_position += 100
+
+    in_shop_page.update_idletasks()
+    canvas_1.bind_all("<MouseWheel>", lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    button_back()
+    button_confirm()
+
+
+
 
 root = mainwindow()
 
@@ -993,7 +1265,22 @@ cart_warp = PhotoImage(file='image_2\cart_warp.png')
 logout = PhotoImage(file='image_2\Logout.png')
 edite = PhotoImage(file='image_2\Edit Profile.png')
 buttom_edite = PhotoImage(file='image_2\\buttom_edite.png')
+but_pass = PhotoImage(file='image_2\\buttom_pass.png')
+save = PhotoImage(file='image_2\save.png')
+bg_pass = PhotoImage(file='image_2\chang_pass.png')
 
-creatconnection()
+img_back = PhotoImage(file="image_2\Back.png").subsample(1, 1)
+img_back1 = PhotoImage(file="image_2\Back (1).png").subsample(1, 1)
+img_myorder = PhotoImage(file="image_2\My Orders.png").subsample(1, 1)
+img_confirm = PhotoImage(file="image_2\Button confirm.png").subsample(1, 1)
+img_confirm2 = PhotoImage(file="image_2\Button confirm 2.png").subsample(1, 1)
+img_BG_nameshop = PhotoImage(file="image_2\Rectangle 1485.png").subsample(1, 1)
+img_BG_order = PhotoImage(file="image_2\\black.png").subsample(1, 1)
+img_BGbuttoncf = PhotoImage(file="image_2\BG Button cf.png").subsample(1, 1)
+img_bigbg = PhotoImage(file="image_2\\bigbg.png").subsample(1, 1)
+bunton_del = PhotoImage(file="image_2\del.png").subsample(1, 1)
+
+button_all()
 home1()
+creatconnection()
 root.mainloop()
