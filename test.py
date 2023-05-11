@@ -35,7 +35,7 @@ def in_shop_3(event):
     global canvas_1,in_shop_page,in_shop
 
     print('ok 2')
-    canvas.destroy()
+    canvas_1.destroy()
     Label_buttom.destroy()
     home_1.destroy()
     canvas_1 = Canvas(root, bg='yellow',width=375, height=1100, scrollregion=(0,0,375,1100))
@@ -66,12 +66,8 @@ def in_shop_3(event):
                 count += data[i][2]
                 Label(in_shop_page,text=count,font='Helvetica 7 bold',fg='#ffffff',bg='#FF7622').place(x=333,y=20)
 
-    cart_shop = Label(in_shop_page,relief=FLAT,image=cart,width=45,height=50,bg='#ffffff',border=0)
-    cart_shop.place(x=308,y=17)
-    def on_enter(e):
-        cart_shop.config(cursor='hand2')
-    cart_shop.bind("<Enter>", on_enter)
-    cart_shop.bind("<Button-1>", buttom_revese)
+    cart_shop = Button(in_shop_page,relief=FLAT,image=cart,width=45,height=50,command=confirm_order,bg='#ffffff',border=0)
+    cart_shop.place(x=308,y=15)
 
 
     sql = "select * from shop_3"
@@ -253,7 +249,7 @@ def in_shop_3(event):
 def in_shop_2(event):
     global canvas_1,in_shop_page,in_shop
     print('ok 2')
-    canvas.destroy()
+    canvas_1.destroy()
     Label_buttom.destroy()
     home_1.destroy()
     canvas_1 = Canvas(root, bg='yellow',width=375, height=1500, scrollregion=(0,0,375,1500))
@@ -285,12 +281,8 @@ def in_shop_2(event):
                 count += data[i][2]
                 Label(in_shop_page,text=count,font='Helvetica 7 bold',fg='#ffffff',bg='#FF7622').place(x=333,y=20)
 
-    cart_shop = Label(in_shop_page,relief=FLAT,image=cart,width=45,height=50,bg='#ffffff',border=0)
-    cart_shop.place(x=308,y=17)
-    def on_enter(e):
-        cart_shop.config(cursor='hand2')
-    cart_shop.bind("<Enter>", on_enter)
-    cart_shop.bind("<Button-1>", buttom_revese)
+    cart_shop = Button(in_shop_page,relief=FLAT,image=cart,width=45,height=50,command=confirm_order,bg='#ffffff',border=0)
+    cart_shop.place(x=308,y=15)
 
 
     sql = "select * from shop_2"
@@ -582,7 +574,7 @@ def in_shop_1(event):
     global canvas_1,in_shop_page,in_shop,cart_shop
 
     print('ok')
-    canvas.destroy()
+    canvas_1.destroy()
     Label_buttom.destroy()
     home_1.destroy()
 
@@ -614,12 +606,9 @@ def in_shop_1(event):
                 count += data[i][2]
                 Label(in_shop_page,text=count,font='Helvetica 7 bold',fg='#ffffff',bg='#FF7622').place(x=333,y=20)
 
-    cart_shop = Label(in_shop_page,relief=FLAT,image=cart,width=45,height=50,bg='#ffffff',border=0)
-    cart_shop.place(x=308,y=17)
-    def on_enter(e):
-        cart_shop.config(cursor='hand2')
-    cart_shop.bind("<Enter>", on_enter)
-    cart_shop.bind("<Button-1>", buttom_revese)
+    cart_shop = Button(in_shop_page,relief=FLAT,image=cart,width=45,height=50,command=confirm_order,bg='#ffffff',border=0)
+    cart_shop.place(x=308,y=15)
+
     check_cart()
 
     sql = "select * from shop_1"
@@ -839,13 +828,6 @@ def pag_edit(event):
     editpag = Label(in_shop_page,relief=FLAT,image=edite,width=375,height=812)
     editpag.pack()
 
-    sql = "select * from login where user_gmail =?"
-    data = gmail.get()
-    cursor.execute(sql,data)
-    result = cursor.fetchall()
-
-
-
     fullname = Entry(in_shop_page,width=20,fg='#646464',border=0,bg='#f0f5fa')
     fullname.place(x=44,y=300)
     fullname.insert(0, result[0][5])
@@ -871,9 +853,9 @@ def pag_edit(event):
     revese.bind("<Button-1>", buttom_revese)
     
 def proflie_pag(event):
-    global canvas_1,in_shop_page,in_shop,cart_shop
+    global canvas_1,in_shop_page,in_shop,cart_shop,result
 
-    canvas.destroy()
+    canvas_1.destroy()
     Label_buttom.destroy()
     home_1.destroy()
 
@@ -888,8 +870,6 @@ def proflie_pag(event):
     cursor.execute(sql,[gmail])
     result = cursor.fetchall()
     print(result)
-    
-
 
     proflie_label = Label(in_shop_page,relief=FLAT,image=proflie,width=375,height=812)
     proflie_label.pack()
@@ -899,13 +879,12 @@ def proflie_pag(event):
          print(result[0][2])
          Label(in_shop_page,font='Helvetica 14 bold',text=result[0][5],fg='#000000',bg='#ffffff').place(x=156,y=141)
          Label(in_shop_page,font='Helvetica 10 bold',text=result[0][4],fg='#929292',bg='#ffffff').place(x=156,y=169)
-    
-    cartgo = Label(in_shop_page,relief=FLAT,image=cart_warp,width=327,height=77,bg='#ffffff',border=0)
-    cartgo.place(x=24,y=406)
+
+    cart_shop = Button(in_shop_page,relief=FLAT,image=cart_warp,width=327,height=77,command=confirm_order,bg='#ffffff',border=0)
+    cart_shop.place(x=24,y=406)
     def on_enter(e):
-        cartgo.config(cursor='hand2')
-    cartgo.bind("<Enter>",on_enter)
-    cartgo.bind("<Button-1>", in_shop_1)
+        cart_shop.config(cursor='hand2')
+    cart_shop.bind("<Enter>",on_enter)
 
     log_put = Label(in_shop_page,relief=FLAT,image=logout,width=327,height=80,bg='#ffffff',border=0)
     log_put.place(x=30,y=700)
@@ -930,13 +909,13 @@ def proflie_pag(event):
     revese.bind("<Button-1>", buttom_revese)
      
 def home1():
-    global splash_page,canvas,home_1,Label_buttom
+    global splash_page,canvas_1,home_1,Label_buttom
 
-
-    canvas = Canvas(root, bg='yellow',width=375, height=853 ,scrollregion=(0,0,375,853))
-    canvas.pack()
-    splash_page = Frame(canvas,bg='#ffffff')
-    canvas.create_window((0,0), window=splash_page, anchor=NW)
+    
+    canvas_1 = Canvas(root, bg='yellow',width=375, height=853 ,scrollregion=(0,0,375,853))
+    canvas_1.pack()
+    splash_page = Frame(canvas_1,bg='#ffffff')
+    canvas_1.create_window((0,0), window=splash_page, anchor=NW)
 
     home_1 = Label(splash_page,relief=FLAT,image=home_v1,width=375,height=853)
     home_1.pack()
@@ -984,28 +963,36 @@ def home1():
                 count += data[i][2]
                 Label(splash_page,text=count,font='Helvetica 7 bold',fg='#ffffff',bg='#FF7622').place(x=335,y=20)
 
-    cart_shop = Label(splash_page,relief=FLAT,image=cart,width=45,height=50,bg='#ffffff',border=0)
-    cart_shop.place(x=311,y=17)
-    def on_enter(e):
-        cart_shop.config(cursor='hand2')
-    cart_shop.bind("<Enter>", on_enter)
-    cart_shop.bind("<Button-1>", confirm_order)
+    cart_shop = Button(splash_page,relief=FLAT,image=cart,width=45,height=50,command=confirm_order,bg='#ffffff',border=0)
+    cart_shop.place(x=311,y=16)
+
 
     check_cart()
-    home_1.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
-    Label_buttom.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
-    Label_buttom_2.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
-    Label_buttom_3.bind('<MouseWheel>', lambda event: canvas.yview_scroll(int(event.delta / 60), "units"))
+    home_1.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    Label_buttom.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    Label_buttom_2.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    Label_buttom_3.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
     splash_page.update_idletasks()
-    canvas.config(scrollregion=canvas.bbox('all'))
+    canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def proflie_revese(event):
     canvas_1.destroy()
     in_shop_page.destroy()
     proflie_pag(event)
+
+def updat_data(event):
+    global result
+    ins_sql = "UPDATE login Set user_gmail=? ,password=? ,name=? ,phone=? ,bio=? ,fullname=? WHERE user_gmail=?" 
+    param = [email_t.get(),pass_t.get(),name_n.get(),phone_t.get(),bio_t.get(),full_name.get(),email_t.get()]
+    cursor.execute(ins_sql,param)
+    result = cursor.fetchall()
+    conn.commit()
+    messagebox.showinfo("Admin :","Updated Successfully")
+    pag_edit(event)
+    
      
 def pag_edit(event):
-    global canvas_1,in_shop_page,in_shop,cart_shop
+    global canvas_1,in_shop_page,in_shop,cart_shop,name_n,email_t,phone_t,bio_t,full_name,result,pass_t
     canvas_1.destroy()
     in_shop_page.destroy()
 
@@ -1021,7 +1008,7 @@ def pag_edit(event):
     def on_enter(e):
         save_but.config(cursor='hand2')
     save_but.bind("<Enter>", on_enter)
-    save_but.bind("<Button-1>", buttom_revese)
+    save_but.bind("<Button-1>", updat_data)
 
     gmail = 0
     sql = "select * from login where user_gmail=?"
@@ -1038,6 +1025,10 @@ def pag_edit(event):
         full_name.place(x=45,y=430)
         full_name.insert(0, result[0][5])
 
+        pass_t = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
+        pass_t.place(x=45,y=726)
+        pass_t.insert(0, result[0][1])
+
         email_t = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
         email_t.place(x=45,y=535)
         email_t.insert(0, result[0][0])
@@ -1049,7 +1040,6 @@ def pag_edit(event):
         bio_t = Entry(in_shop_page,font='Helvetica 10 bold',width=22,fg='#646464',border=0,bg='#f0f5fa')
         bio_t.place(x=45,y=849)
         bio_t.insert(0, result[0][4])
-
 
     pass_but = Label(in_shop_page,relief=FLAT,image=but_pass,width=327,height=62,bg='#ffffff',border=0)
     pass_but.place(x=27,y=726)
@@ -1081,26 +1071,23 @@ def chang_pass_revese(event):
     in_shop_page.destroy()
     pag_edit(event)
 
-def update_pass(event):
-    gmail = 0
-    sql = "select * from login where user_gmail=?"
-    cursor.execute(sql,[gmail])
-    result = cursor.fetchall()
-    print(result)
-
-    if n_pass.get() == "" :
-        messagebox.showwarning("Admin :","Please enter New Password")
-    elif cfn_pass.get() == "" :
-        messagebox.showwarning("Admin :","Please enter Confirm New Password")
+def update_pass(event):  
+    global result
+    if n_pass.get() == '':
+        messagebox.WARNING("Admin :","Please Enter New Password")
+    elif cfn_pass.get() == '' :
+        messagebox.WARNING("Admin :","Please Enter Confirm Password")
     elif n_pass.get() != cfn_pass.get() :
-        messagebox.showwarning("Admin :","Password did not match")
-        print(n_pass.get())
-        print(cfn_pass.get())
-    else :
-        sql = "UPDATE login SET password = ? WHERE user_gmail = ?"
-        cursor.execute(sql,[n_pass.get(),gmail])
+        messagebox.WARNING("Admin :","Password not Math !!")
+    else:
+        ins_sql = "UPDATE login Set password=? WHERE user_gmail=?" 
+        param = [n_pass.get(),result[0][0]]
+        cursor.execute(ins_sql,param)
+        result = cursor.fetchall()
         conn.commit()
-        messagebox.showinfo("Admin :","Password Changed Successfully")
+        messagebox.showinfo("Admin :","Updated Successfully")
+        chang_pass_revese(event)
+        
 
 def changpass(event):
     global canvas_1, in_shop_page,n_pass,cfn_pass
@@ -1123,6 +1110,7 @@ def changpass(event):
     cfn_pass = Entry(in_shop_page,width=22,fg='#646464',show='*',border=0,bg='#f0f5fa')
     cfn_pass.place(x=44,y=515)
     cfn_pass.insert(0, '')
+    
 
     revese = Label(in_shop_page,relief=FLAT,image=buttom_back,width=45,height=45,bg='#ffffff',border=0)
     revese.place(x=25,y=51)
@@ -1155,7 +1143,7 @@ def button_all():
 
         Label_buttom.bind("<Enter>", on_enter)
         Label_buttom.bind("<Leave>", on_leave)
-        Label_buttom.bind("<Button-1>", chang_pass_revese)
+        Label_buttom.bind("<Button-1>", buttom_revese)
 
     def button_confirm():
         global Label_buttom
@@ -1170,28 +1158,76 @@ def button_all():
 
         Label_buttom.bind("<Enter>", on_enter)
         Label_buttom.bind("<Leave>", on_leave)
+        Label_buttom.bind("<Button-1>", price)
+def price(event):
+    i = 0
+    while i < len(data):
+        if data[i][0] == 'ร้านป้าแจ๋ม เบอร์ตอง':
+            sql = "SELECT * FROM shop_1 WHERE food = ?"
+            cursor.execute(sql,[data[i][1]])
+            result = cursor.fetchone()
+            if result[0] == data[i][1]:
+                updat = result[1] - data[i][2]
+                ins_sql = "UPDATE shop_1 Set amount=? WHERE food=?" 
+                param = [updat,result[0]]
+                cursor.execute(ins_sql,param)
+                conn.commit()
+                data.pop(i)
+            else:
+                i += 1
+        elif data[i][0] == 'KFC สาขา รังสิต':
+            sql = "SELECT * FROM shop_2 WHERE food = ?"
+            cursor.execute(sql,[data[i][1]])
+            result = cursor.fetchone()
+            if result[0] == data[i][1]:
+                updat = result[1] - data[i][2]
+                ins_sql = "UPDATE shop_2 Set amount=? WHERE food=?" 
+                param = [updat,result[0]]
+                cursor.execute(ins_sql,param)
+                conn.commit()
+                data.pop(i)
+            else:
+                i += 1
 
-def delete_order_item(event):
-    print(index)
+        elif data[i][0] == 'Cafe Amazon':
+            sql = "SELECT * FROM shop_3 WHERE food = ?"
+            cursor.execute(sql,[data[i][1]])
+            result = cursor.fetchone()
+            if result[0] == data[i][1]:
+                updat = result[1] - data[i][2]
+                ins_sql = "UPDATE shop_3 Set amount=? WHERE food=?" 
+                param = [updat,result[0]]
+                cursor.execute(ins_sql,param)
+                conn.commit()
+                data.pop(i)
+            else:
+                i += 1
+             
+    buttom_revese(event)
+
+     
+data = []
+
+def delete_order_item(index):
     data.pop(index)
     canvas_1.destroy()
-    in_shop_page.destroy()
-    print(data)
-    confirm_order(event)
+    splash_page.destroy()
+    confirm_order()
 
-def confirm_order(event):
-    global canvas, in_shop_page,canvas,home_1
+def confirm_order():
+    global in_shop_page,canvas_1,allprice
+
+    canvas_1.destroy()
     
-    canvas.destroy()
-    home_1.destroy()
-    in_shop_page.destroy()
-    
-    canvas_1 = Canvas(root, bg='#ffffff', width=375, height=812, scrollregion=(0, 0, 375,812))
+
+    canvas_1 = Canvas(root, bg='#ffffff', width=375, height=500, scrollregion=(0, 0, 375,500))
     canvas_1.pack()
     in_shop_page = Frame(canvas_1, bg='#ffffff')
     canvas_1.create_window((0, 0), window=in_shop_page, anchor=NW)
-    home_1 = Label(in_shop_page, relief=FLAT, bg='#ffffff', width=375, height=812)
+    home_1 = Label(in_shop_page, relief=FLAT, bg='#ffffff', width=375, height=500)
     home_1.pack()
+
+    Label(bg='#ffffff', width=327, height=312).place(x=0,y=500)
     Label(image=img_bigbg, border=0, bg='#ffffff').place(x=-21, y=512)
     Label(image=img_BGbuttoncf, border=0, bg='#ffffff').place(x=22, y=512)
     Label(text="ค่าจัดส่ง",font="Helvetica 10 bold", border=0,bg="#C8C8C8").place(x=44, y=558)
@@ -1207,32 +1243,38 @@ def confirm_order(event):
 
 
     y_position = 126
-    canvas_height = y_position + len(data) * 135
-    canvas_1.config(height=812, scrollregion=(0, 0, 375, canvas_height))
+    canvas_height =  y_position + len(data) * 100
+    print(canvas_height)
+    if canvas_height < 500 :
+        canvas_1.config(height=500, scrollregion=(0, 0, 375, 500))
+    else:
+        canvas_1.config(height=500, scrollregion=(0, 0, 375, canvas_height))
+
+
+    Label(in_shop_page, image=img_myorder, border=0, bg='#ffffff').place(x=85, y=62)
 
     for i, order_item in enumerate(data):
-        global index
-        index = i
         order_shop = order_item[0]
         order_text_menu = order_item[1]
         order_text_menu_count = order_item[2]
         order_text_menu_price = order_item[3]
 
-        Label(in_shop_page, image=img_myorder, border=0, bg='#ffffff').place(x=85, y=62)
         Label(in_shop_page, image=img_BG_order, border=0, bg='#ffffff').place(x=22, y=y_position - 10)
         Label(in_shop_page, text=order_shop, font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=41, y=y_position)
         Label(in_shop_page, text=order_text_menu, font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=41, y=y_position + 23)
         Label(in_shop_page, text=order_text_menu_price, font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=301, y=y_position + 23)
         Label(in_shop_page, text=("x" + str(order_text_menu_count)), font="Helvetica 10 bold", border=0, background='#F0F5FA').place(x=41, y=y_position + 48)
-        delete_button = Button(in_shop_page,image=bunton_del,border=0,bg='#F0F5FA',command=lambda : delete_order_item(event),cursor='hand2')
+
+        delete_button = Button(in_shop_page,image=bunton_del,border=0,bg='#F0F5FA',command=lambda idx=i: delete_order_item(idx),cursor='hand2')
         delete_button.place(x=325, y=y_position + 23)
+        
         y_position += 100
 
     in_shop_page.update_idletasks()
-    canvas_1.bind_all("<MouseWheel>", lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
+    in_shop_page.bind_all("<MouseWheel>", lambda event: canvas_1.yview_scroll(int(-1 * (event.delta / 120)), "units"))
+    canvas_1.bind_all("<MouseWheel>", lambda event: canvas_1.yview_scroll(int(-1 * (event.delta / 120)), "units"))
     button_back()
     button_confirm()
-
 
 
 
