@@ -68,7 +68,7 @@ def in_shop_3(event):
 
     cart_shop = Button(in_shop_page,relief=FLAT,image=cart,width=45,height=50,command=confirm_order,bg='#ffffff',border=0)
     cart_shop.place(x=308,y=15)
-
+    cart_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     sql = "select * from shop_3"
     cursor.execute(sql)
@@ -112,8 +112,7 @@ def in_shop_3(event):
         if not check:
             data.append(['Cafe Amazon','ชาเขียว',1,50])
         check_cart()
-        print(data)
-        
+        print(data)      
     def ช็อกโกแลต(event):
         check = False
         for item in data:
@@ -207,6 +206,7 @@ def in_shop_3(event):
         buttom_shop_1.config(cursor='hand2')
     buttom_shop_1.bind("<Enter>",on_enter)
     buttom_shop_1.bind("<Button-1>",ชาเขียว)
+    buttom_shop_1.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_2 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_2.place(x=310,y=598)
@@ -214,6 +214,7 @@ def in_shop_3(event):
         buttom_shop_2.config(cursor='hand2')
     buttom_shop_2.bind("<Enter>",on_enter)
     buttom_shop_2.bind("<Button-1>",ช็อกโกแลต)
+    buttom_shop_2.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_3 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_3.place(x=136,y=780)
@@ -221,6 +222,7 @@ def in_shop_3(event):
         buttom_shop_3.config(cursor='hand2')
     buttom_shop_3.bind("<Enter>",on_enter)
     buttom_shop_3.bind("<Button-1>",นมสด_fresh_milk)
+    buttom_shop_3.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_4 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_4.place(x=310,y=780)
@@ -228,6 +230,7 @@ def in_shop_3(event):
         buttom_shop_4.config(cursor='hand2')
     buttom_shop_4.bind("<Enter>",on_enter)
     buttom_shop_4.bind("<Button-1>",สตรอเบอร์รี่ชีสเค้ก)
+    buttom_shop_4.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_5 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_5.place(x=137,y=962)
@@ -235,6 +238,7 @@ def in_shop_3(event):
         buttom_shop_5.config(cursor='hand2')
     buttom_shop_5.bind("<Enter>",on_enter)
     buttom_shop_5.bind("<Button-1>",คาปูชิโน่)
+    buttom_shop_5.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_6 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_6.place(x=311,y=962)
@@ -242,6 +246,7 @@ def in_shop_3(event):
         buttom_shop_6.config(cursor='hand2')
     buttom_shop_6.bind("<Enter>",on_enter)
     buttom_shop_6.bind("<Button-1>",ไลท์คอฟฟี่ฮันนี่)
+    buttom_shop_6.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     in_shop_page.update_idletasks()
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
@@ -502,6 +507,7 @@ def in_shop_2(event):
         buttom_shop_1.config(cursor='hand2')
     buttom_shop_1.bind("<Enter>",on_enter)
     buttom_shop_1.bind("<Button-1>",ไก่ทอด_1_ชิ้น)
+    buttom_shop_1.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_2 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_2.place(x=311,y=600)
@@ -509,6 +515,7 @@ def in_shop_2(event):
         buttom_shop_2.config(cursor='hand2')
     buttom_shop_2.bind("<Enter>",on_enter)
     buttom_shop_2.bind("<Button-1>",ข้าวไก่แซ่บโบว์ล)
+    buttom_shop_2.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_3 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_3.place(x=137,y=782)
@@ -516,6 +523,7 @@ def in_shop_2(event):
         buttom_shop_3.config(cursor='hand2')
     buttom_shop_3.bind("<Enter>",on_enter)
     buttom_shop_3.bind("<Button-1>",ซิงเกอร์เบอร์เกอร์)
+    buttom_shop_3.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_4 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_4.place(x=311,y=782)
@@ -523,6 +531,7 @@ def in_shop_2(event):
         buttom_shop_4.config(cursor='hand2')
     buttom_shop_4.bind("<Enter>",on_enter)
     buttom_shop_4.bind("<Button-1>",เฟรนช์ฟรายส์)
+    buttom_shop_4.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_5 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_5.place(x=138,y=964)
@@ -530,6 +539,7 @@ def in_shop_2(event):
         buttom_shop_5.config(cursor='hand2')
     buttom_shop_5.bind("<Enter>",on_enter)
     buttom_shop_5.bind("<Button-1>",ชุดบักเก็ตฟอร์วันมิล)
+    buttom_shop_5.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_6 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_6.place(x=312,y=964)
@@ -537,6 +547,7 @@ def in_shop_2(event):
         buttom_shop_6.config(cursor='hand2')
     buttom_shop_6.bind("<Enter>",on_enter)
     buttom_shop_6.bind("<Button-1>",แซนเดอร์_ไก่ฮิต)
+    buttom_shop_6.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_7 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_7.place(x=138,y=1146)
@@ -544,6 +555,7 @@ def in_shop_2(event):
         buttom_shop_7.config(cursor='hand2')
     buttom_shop_7.bind("<Enter>",on_enter)
     buttom_shop_7.bind("<Button-1>",เฮลิเดย์_บักเก็ต)
+    buttom_shop_7.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_8 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_8.place(x=312,y=1146)
@@ -551,6 +563,7 @@ def in_shop_2(event):
         buttom_shop_8.config(cursor='hand2')
     buttom_shop_8.bind("<Enter>",on_enter)
     buttom_shop_8.bind("<Button-1>",อิ่มสุขใจ)
+    buttom_shop_8.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_9 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_9.place(x=137,y=1336)
@@ -558,6 +571,7 @@ def in_shop_2(event):
         buttom_shop_9.config(cursor='hand2')
     buttom_shop_9.bind("<Enter>",on_enter)
     buttom_shop_9.bind("<Button-1>",แซนเดอร์ส_คอมโบ)
+    buttom_shop_9.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_10 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_10.place(x=311,y=1336)
@@ -565,6 +579,7 @@ def in_shop_2(event):
         buttom_shop_10.config(cursor='hand2')
     buttom_shop_10.bind("<Enter>",on_enter)
     buttom_shop_10.bind("<Button-1>",สแน็คสนุก)
+    buttom_shop_10.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
 
     in_shop_page.update_idletasks()
@@ -595,6 +610,7 @@ def in_shop_1(event):
         revese.config(cursor='hand2')
     revese.bind("<Enter>",on_enter)
     revese.bind("<Button-1>", buttom_revese)
+    revese.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
     
     def check_cart():
         if len(data) == 0 :
@@ -608,6 +624,7 @@ def in_shop_1(event):
 
     cart_shop = Button(in_shop_page,relief=FLAT,image=cart,width=45,height=50,command=confirm_order,bg='#ffffff',border=0)
     cart_shop.place(x=308,y=15)
+    cart_shop.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     check_cart()
 
@@ -767,6 +784,7 @@ def in_shop_1(event):
         buttom_shop_1.config(cursor='hand2')
     buttom_shop_1.bind("<Enter>",on_enter)
     buttom_shop_1.bind("<Button-1>",พัดกระเพราหมู)
+    buttom_shop_1.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_2 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_2.place(x=310,y=598)
@@ -774,6 +792,7 @@ def in_shop_1(event):
         buttom_shop_2.config(cursor='hand2')
     buttom_shop_2.bind("<Enter>",on_enter)
     buttom_shop_2.bind("<Button-1>",ข้าวหมูกระเทียม)
+    buttom_shop_2.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_3 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_3.place(x=136,y=780)
@@ -781,6 +800,7 @@ def in_shop_1(event):
         buttom_shop_3.config(cursor='hand2')
     buttom_shop_3.bind("<Enter>",on_enter)
     buttom_shop_3.bind("<Button-1>",ข้าวพัด)
+    buttom_shop_3.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_4 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_4.place(x=310,y=780)
@@ -788,6 +808,7 @@ def in_shop_1(event):
         buttom_shop_4.config(cursor='hand2')
     buttom_shop_4.bind("<Enter>",on_enter)
     buttom_shop_4.bind("<Button-1>",ข้าวมันไก่)
+    buttom_shop_4.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_5 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_5.place(x=137,y=962)
@@ -795,6 +816,7 @@ def in_shop_1(event):
         buttom_shop_5.config(cursor='hand2')
     buttom_shop_5.bind("<Enter>",on_enter)
     buttom_shop_5.bind("<Button-1>",ข้าวพัดพริกแกงหมู)
+    buttom_shop_5.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_6 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_6.place(x=311,y=962)
@@ -802,13 +824,15 @@ def in_shop_1(event):
         buttom_shop_6.config(cursor='hand2')
     buttom_shop_6.bind("<Enter>",on_enter)
     buttom_shop_6.bind("<Button-1>",ข้าวลาบหมู)
+    buttom_shop_6.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
     buttom_shop_7 = Label(in_shop_page,relief=FLAT,image=shop_buttom,width=30,height=30,bg='#ffffff',border=0)
     buttom_shop_7.place(x=137,y=1144)
     def on_enter(e):
         buttom_shop_7.config(cursor='hand2')
-    buttom_shop_7.bind("<Enter>",on_enter)
+    buttom_shop_7.bind("<Enter>",on_enter) 
     buttom_shop_7.bind("<Button-1>",พัดซีอิ้ว)
+    buttom_shop_7.bind('<MouseWheel>', lambda event: canvas_1.yview_scroll(int(event.delta / 60), "units"))
 
 
     in_shop_page.update_idletasks()
