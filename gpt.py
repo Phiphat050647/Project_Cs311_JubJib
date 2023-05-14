@@ -1,2 +1,2 @@
 โอเคร ok kub hi
-bye
+bye ควย
