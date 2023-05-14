@@ -15,7 +15,7 @@ def mainwindow():
     y = root.winfo_screenheight()/2 - h/2
     root.geometry("%dx%d+%d+%d"%(w,h,x,y))
     root.config(bg='#1D708B')
-    root.title("Login Application: ")
+    root.title("Welcome Application: ")
     root.option_add('*font',"Helvetica 18 bold")
     root.rowconfigure((0),weight=1)
     root.columnconfigure((0),weight=1)
@@ -23,6 +23,7 @@ def mainwindow():
     return root
 
 def firt_pace() :
+
     global splash_page,canvas_1
     canvas_1 = Canvas(root, bg='#ffffff',width=375, height=812 ,scrollregion=(0,0,375,812))
     canvas_1.pack()
@@ -120,6 +121,7 @@ def buttom_all():
 
 def register(event):
     Label(splash_page,relief=FLAT,image=bg_signup).place(x=-1,y=-1)
+    root.title("register Application: ")
     global name,gmail,password,password_cf
     def name_on_leave(e):
         if name.get()=="":
@@ -207,7 +209,8 @@ def registration_data(event) :
             messagebox.showinfo("Admin","Registration Successfully")
             pag_login()
 
-def  pag_login():
+def pag_login():
+    root.title("Login Application: ")
     Label(splash_page,relief=FLAT,image=login_pag).place(x=-1,y=-1)
     global gmail,password
     def gmail_on_leave(e):
@@ -265,6 +268,7 @@ def loginclick(event) :
             gmail.focus_force()
 
 def page_2():
+    root.title("Welcome To JukJik")
     Label(splash_page,relief=FLAT,image=page2).grid(row=0,column=0,sticky=NSEW)
     buttom_click_pag2(24,675)
 
@@ -275,7 +279,7 @@ def gohome(event):
 
 def pag3(event):
         Label(splash_page,relief=FLAT,image=page3).grid(row=0,column=0,sticky=NSEW)
-
+        root.title("Welcome To JukJik")
         Label_buttom = Label(splash_page,relief=FLAT,image=buttom_image,width=327,height=62,bg='#ffffff',border=0)
         Label_buttom.place(x=24,y=675)
         def on_enter(e):
@@ -305,6 +309,7 @@ def buttom_revese(event):
 data = []
 
 def in_shop_3(event):
+    root.title("Cafe Amazon : Menu")
     global canvas_1,in_shop_page,in_shop
 
     canvas_1.destroy()
@@ -517,6 +522,7 @@ def in_shop_3(event):
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def in_shop_2(event):
+    root.title("KFC สาขา รังสิต : Menu")
     global canvas_1,in_shop_page,in_shop
     canvas_1.destroy()
     Label_buttom.destroy()
@@ -839,6 +845,7 @@ def in_shop_2(event):
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def in_shop_1(event):
+    root.title("ร้านป้าแจ๋ม เบอร์ตอง : Menu")
     global canvas_1,in_shop_page,in_shop,cart_shop
 
     canvas_1.destroy()
@@ -1083,6 +1090,7 @@ def in_shop_1(event):
     canvas_1.config(scrollregion=canvas_1.bbox('all'))
 
 def pag_edit(event):
+    root.title("Proflie Edit")
     global canvas_1,in_shop_page,in_shop,cart_shop
     canvas_1.destroy()
     in_shop_page.destroy()
@@ -1125,6 +1133,7 @@ def go_logout(event):
      
 def proflie_pag(event):
     global canvas_1,in_shop_page,in_shop,cart_shop,result
+    root.title("Profile :")
 
     canvas_1.destroy()
     Label_buttom.destroy()
@@ -1176,6 +1185,7 @@ def proflie_pag(event):
     revese.bind("<Button-1>", buttom_revese)
      
 def home1():
+    root.title("Menu Home")
     global splash_page,canvas_1,home_1,Label_buttom
 
     
@@ -1457,6 +1467,7 @@ def delete_order_item(index):
     confirm_order()
 
 def confirm_order():
+    root.title("Cart : Confirm Order")
     global in_shop_page,canvas_1,allprice
 
     canvas_1.destroy()
