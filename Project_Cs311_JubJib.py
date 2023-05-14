@@ -1394,50 +1394,58 @@ def changpass(event):
     #----------------------------------------------------------------------------------------------
     
 def price(event):
-    i = 0
-    while i < len(data):
-        if data[i][0] == 'ร้านป้าแจ๋ม เบอร์ตอง':
-            sql = "SELECT * FROM shop_1 WHERE food = ?"
-            cursor.execute(sql,[data[i][1]])
-            result = cursor.fetchone()
-            if result[0] == data[i][1]:
-                updat = result[1] - data[i][2]
-                ins_sql = "UPDATE shop_1 Set amount=? WHERE food=?" 
-                param = [updat,result[0]]
-                cursor.execute(ins_sql,param)
-                conn.commit()
-                data.pop(i)
-            else:
-                i += 1
-        elif data[i][0] == 'KFC สาขา รังสิต':
-            sql = "SELECT * FROM shop_2 WHERE food = ?"
-            cursor.execute(sql,[data[i][1]])
-            result = cursor.fetchone()
-            if result[0] == data[i][1]:
-                updat = result[1] - data[i][2]
-                ins_sql = "UPDATE shop_2 Set amount=? WHERE food=?" 
-                param = [updat,result[0]]
-                cursor.execute(ins_sql,param)
-                conn.commit()
-                data.pop(i)
-            else:
-                i += 1
+    status = messagebox.askyesno(title='Question',message="Do you want to oder ?")
+    print(status)
+    if status == True:
+        i = 0
+        while i < len(data):
 
-        elif data[i][0] == 'Cafe Amazon':
-            sql = "SELECT * FROM shop_3 WHERE food = ?"
-            cursor.execute(sql,[data[i][1]])
-            result = cursor.fetchone()
-            if result[0] == data[i][1]:
-                updat = result[1] - data[i][2]
-                ins_sql = "UPDATE shop_3 Set amount=? WHERE food=?" 
-                param = [updat,result[0]]
-                cursor.execute(ins_sql,param)
-                conn.commit()
-                data.pop(i)
+            if data[i][0] == 'ร้านป้าแจ๋ม เบอร์ตอง':
+                sql = "SELECT * FROM shop_1 WHERE food = ?"
+                cursor.execute(sql,[data[i][1]])
+                result = cursor.fetchone()
+                if result[0] == data[i][1]:
+                    updat = result[1] - data[i][2]
+                    ins_sql = "UPDATE shop_1 Set amount=? WHERE food=?" 
+                    param = [updat,result[0]]
+                    cursor.execute(ins_sql,param)
+                    conn.commit()
+                    data.pop(i)
+                else:
+                    i += 1
+            elif data[i][0] == 'KFC สาขา รังสิต':
+                sql = "SELECT * FROM shop_2 WHERE food = ?"
+                cursor.execute(sql,[data[i][1]])
+                result = cursor.fetchone()
+                if result[0] == data[i][1]:
+                    updat = result[1] - data[i][2]
+                    ins_sql = "UPDATE shop_2 Set amount=? WHERE food=?" 
+                    param = [updat,result[0]]
+                    cursor.execute(ins_sql,param)
+                    conn.commit()
+                    data.pop(i)
+                else:
+                    i += 1
+
+            elif data[i][0] == 'Cafe Amazon':
+                sql = "SELECT * FROM shop_3 WHERE food = ?"
+                cursor.execute(sql,[data[i][1]])
+                result = cursor.fetchone()
+                if result[0] == data[i][1]:
+                    updat = result[1] - data[i][2]
+                    ins_sql = "UPDATE shop_3 Set amount=? WHERE food=?" 
+                    param = [updat,result[0]]
+                    cursor.execute(ins_sql,param)
+                    conn.commit()
+                    data.pop(i)
             else:
                 i += 1
-             
-    buttom_revese(event)
+            
+            buttom_revese(event)
+    else:
+        confirm_order()
+    
+    
 
      
 data = []
